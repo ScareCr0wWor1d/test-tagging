@@ -17,6 +17,10 @@ et ce projet adhère à [Semantic Versioning](https://semver.org/lang/fr/).
 
 ## [Non publié]
 
+## [1.0.1] - 2026-02-01
+### Ajouté
+- Test pour version mineure
+
 ## [1.0.0] - 2026-02-01
 ### Ajouté
 - Initialisation du projet.
