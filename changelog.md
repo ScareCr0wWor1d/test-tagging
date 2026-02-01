@@ -17,6 +17,10 @@ et ce projet adhère à [Semantic Versioning](https://semver.org/lang/fr/).
 
 ## [Non publié]
 
+## [4.0.0] - 2026-01-31
+### Ajouté
+- Correction du code pour appliquer sur main.
+
 ## [3.0.0] - 2026-01-31
 ### Ajouté
 - Correction du code pour appliquer sur main.

@@ -2,7 +2,7 @@ name: Tag from changelog
 # Ajout de code juste pour le test
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "master" ]
 
 permissions:
   contents: write
@@ -19,16 +19,25 @@ jobs:
       - name: Detect version in changelog
         id: ver
         run: |
-          # extrait la première version du changelog (vX.Y.Z)
-          VERSION=$(grep -m1 -E '^##[[:space:]]+v[0-9]+\.[0-9]+\.[0-9]+' changelog.md | sed -E 's/^##[[:space:]]+//')
-          if [ -z "$VERSION" ]; then
-            echo "No version found in changelog.md"
+          FILE="changelog.md"
+
+          # Trouve la première ligne du style: ## [3.0.0] - 2026-01-31
+          LINE=$(grep -m1 -E '^##[[:space:]]+\[[0-9]+\.[0-9]+\.[0-9]+\][[:space:]]+-' "$FILE" || true)
+
+          if [ -z "$LINE" ]; then
+            echo "No version found in $FILE"
             echo "found=false" >> $GITHUB_OUTPUT
             exit 0
           fi
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+          # Extrait 3.0.0 entre les crochets
+          VERSION=$(echo "$LINE" | sed -E 's/^##[[:space:]]+\[([0-9]+\.[0-9]+\.[0-9]+)\].*/\1/')
+
+          TAG="v$VERSION"
+
+          echo "version=$TAG" >> $GITHUB_OUTPUT
           echo "found=true" >> $GITHUB_OUTPUT
-          echo "Found version: $VERSION"
+          echo "Found version: $TAG"
 
       - name: Check if tag already exists
         if: steps.ver.outputs.found == 'true'
