@@ -1,8 +1,8 @@
 name: Tag from changelog
-
+# Ajout de code juste pour le test
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 permissions:
   contents: write
