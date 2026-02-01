@@ -1,5 +1,5 @@
 name: Tag from changelog
-# Ajout de code juste pour le test
+
 on:
   push:
     branches: [ "main", "master" ]
